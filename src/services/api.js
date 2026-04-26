@@ -15,6 +15,16 @@ class APIError extends Error {
   }
 }
 
+const parseResponse = async (response) => {
+  const text = await response.text();
+  if (!text) return {};
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { detail: text };
+  }
+};
+
 const fetchWithToken = async (endpoint, options = {}) => {
   try {
     const token = localStorage.getItem('auth_token');
@@ -24,12 +34,12 @@ const fetchWithToken = async (endpoint, options = {}) => {
     const response = await fetch(API_BASE_URL + endpoint, { ...options, headers });
     
     if (!response.ok) {
-      const data = await response.json().catch(() => ({ error: 'Invalid response' }));
-      throw new APIError(data.detail || data.message || 'Error', response.status, data);
+      const data = await parseResponse(response);
+      throw new APIError(data.detail || data.message || response.statusText || 'Error', response.status, data);
     }
     
     if (response.status === 204) return { success: true };
-    return await response.json().catch(() => ({ success: true }));
+    return await response.json().catch(async () => ({ success: true }));
   } catch (error) {
     console.error('API Error:', error);
     throw error;
@@ -43,7 +53,7 @@ const authAPI = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username.trim(), email, password, password_confirm: password }),
     });
-    const data = await response.json();
+    const data = await parseResponse(response);
     if (!response.ok) throw new APIError(data.detail || data.message || 'Registration failed', response.status, data);
     return data.user ? { token: data.token, ...data.user } : data;
   },
@@ -56,7 +66,7 @@ const authAPI = {
       headers,
       body: JSON.stringify({ username, email, password, password_confirm: password }),
     });
-    const data = await response.json();
+    const data = await parseResponse(response);
     if (!response.ok) throw new APIError(data.detail || data.message || 'Admin registration failed', response.status, data);
     return data.user ? { token: data.token, ...data.user } : data;
   },
@@ -67,7 +77,7 @@ const authAPI = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username.trim(), password }),
     });
-    const data = await response.json();
+    const data = await parseResponse(response);
     if (!response.ok) throw new APIError(data.detail || data.message || 'Login failed', response.status, data);
     return data.user ? { token: data.token, ...data.user } : data;
   },
@@ -79,15 +89,16 @@ const authAPI = {
     method: 'POST',
     body: JSON.stringify({ old_password: oldPassword, new_password: newPassword }),
   }),
-  requestPasswordReset: (email) => fetch(API_BASE_URL + '/users/request_password_reset/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-  }).then(async (r) => {
-    const data = await r.json();
-    if (!r.ok) throw new APIError(data.detail || data.message || 'Request failed', r.status, data);
+  requestPasswordReset: async (email) => {
+    const response = await fetch(API_BASE_URL + '/users/request_password_reset/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await parseResponse(response);
+    if (!response.ok) throw new APIError(data.detail || data.message || 'Request failed', response.status, data);
     return data;
-  }),
+  },
 };
 
 const plantsAPI = {
