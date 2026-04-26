@@ -32,7 +32,9 @@ const AdminUserList = ({ users = [], currentUser, onEdit, onDelete, onResetPassw
       for (const user of users) {
         // Get user's plants
         const userPlants = allPlants.filter(plant => 
-          plant.owner_username === user.username || plant.owner_id === user.id
+          plant.owner_id === user.id || 
+          plant.owner_username === user.username || 
+          plant.owner_username === user.first_name
         );
         
         // Calculate metrics
@@ -87,29 +89,31 @@ const AdminUserList = ({ users = [], currentUser, onEdit, onDelete, onResetPassw
                 headers: { 'Authorization': `Token ${token}` }
               }
             );
-            
+
             if (adminActionsResponse.ok) {
               const adminActions = await adminActionsResponse.json();
               if (adminActions.length > 0) {
                 const mostRecentAdminAction = adminActions[0];
                 const adminActionDate = new Date(mostRecentAdminAction.timestamp);
-                
+
                 if (!isNaN(adminActionDate.getTime())) {
                   if (!mostRecentDate || adminActionDate > mostRecentDate) {
                     mostRecentDate = adminActionDate;
                   }
                 }
               }
+            } else {
+              console.warn(`[AdminUserList] Admin actions fetch failed for user ${user.id}:`, adminActionsResponse.status);
             }
           } catch (apiError) {
             console.warn(`[AdminUserList] Could not fetch admin actions for user ${user.id}:`, apiError);
           }
         }
-        
+
         if (mostRecentDate) {
           lastActivity = mostRecentDate;
         }
-        
+
         metrics[user.id || user.username] = {
           plantCount,
           activityCount: recentPlants.length,
@@ -117,19 +121,11 @@ const AdminUserList = ({ users = [], currentUser, onEdit, onDelete, onResetPassw
           lastActivity
         };
       }
+
+      setUserMetrics(metrics);
     } catch (err) {
       console.error('Error fetching user metrics:', err);
-      // Fallback to default metrics
-      const metrics = {};
-      users.forEach(user => {
-        metrics[user.id || user.username] = {
-          plantCount: 0,
-          activityCount: 0,
-          engagementScore: 0,
-          lastActivity: 'Never'
-        };
-      });
-      setUserMetrics(metrics);
+      setUserMetrics({});
     } finally {
       setLoadingMetrics(false);
     }
