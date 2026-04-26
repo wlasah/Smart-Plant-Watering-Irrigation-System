@@ -45,7 +45,7 @@ const authAPI = {
     });
     const data = await response.json();
     if (!response.ok) throw new APIError(data.detail || data.message || 'Registration failed', response.status, data);
-    return data;
+    return data.user ? { token: data.token, ...data.user } : data;
   },
   
   registerAdmin: async (username, email, password, token = null) => {
@@ -58,7 +58,7 @@ const authAPI = {
     });
     const data = await response.json();
     if (!response.ok) throw new APIError(data.detail || data.message || 'Admin registration failed', response.status, data);
-    return data;
+    return data.user ? { token: data.token, ...data.user } : data;
   },
   
   login: async (username, password) => {
@@ -69,7 +69,7 @@ const authAPI = {
     });
     const data = await response.json();
     if (!response.ok) throw new APIError(data.detail || data.message || 'Login failed', response.status, data);
-    return data;
+    return data.user ? { token: data.token, ...data.user } : data;
   },
   
   getCurrentUser: () => fetchWithToken('/users/me/'),
@@ -101,7 +101,18 @@ const plantsAPI = {
 
 const historyAPI = {
   getByPlantId: (id) => fetchWithToken('/plants/' + id + '/watering_history/'),
+  getHistory: () => fetchWithToken('/watering-history/'),
   getAllPaginated: (page = 1, size = 20) => fetchWithToken('/watering_history/?page=' + page + '&page_size=' + size),
+  getAllHistoryAdmin: async () => {
+    try {
+      return await fetchWithToken('/watering_history/admin/');
+    } catch (err) {
+      if (err.status === 404 || err.status === 405) {
+        return await fetchWithToken('/watering-history/all_history/');
+      }
+      throw err;
+    }
+  },
   getStats: () => fetchWithToken('/watering_history/stats/'),
 };
 

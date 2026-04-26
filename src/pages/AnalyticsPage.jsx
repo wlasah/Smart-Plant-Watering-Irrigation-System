@@ -93,8 +93,8 @@ const AnalyticsPage = () => {
         
         const mappedHistory = historyList.map(entry => ({
           id: entry.id,
-          plant_id: entry.plant,
-          watering_date: entry.watering_date,
+          plant_id: entry.plant_id,
+          watering_date: entry.watered_at,
           notes: entry.notes,
         }));
         setWateringHistory(mappedHistory);

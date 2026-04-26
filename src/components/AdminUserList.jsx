@@ -25,7 +25,8 @@ const AdminUserList = ({ users = [], currentUser, onEdit, onDelete, onResetPassw
       }
       
       // Get token for API calls
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('auth_token');
+      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
       
       const metrics = {};
       for (const user of users) {
@@ -81,7 +82,7 @@ const AdminUserList = ({ users = [], currentUser, onEdit, onDelete, onResetPassw
         if (token) {
           try {
             const adminActionsResponse = await fetch(
-              `${process.env.REACT_APP_API_URL}/users/get_user_actions/?target_user_id=${user.id}&limit=1`,
+              `${API_BASE_URL}/users/get_user_actions/?target_user_id=${user.id}&limit=1`,
               {
                 headers: { 'Authorization': `Token ${token}` }
               }

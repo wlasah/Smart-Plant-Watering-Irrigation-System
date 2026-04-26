@@ -33,13 +33,16 @@ const AdminDashboard = ({ onNotification }) => {
   const [activityLog, setActivityLog] = useState([]);
   const [metricsRefreshTrigger, setMetricsRefreshTrigger] = useState(0);
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+  const API_HOST = API_BASE_URL.replace(/\/api\/?$/, '');
+
   // Function to log admin actions to backend
   const logAdminAction = async (actionType, targetUserId, targetUsername, details = {}) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('auth_token');
       if (!token) return; // Not authenticated
       
-      const response = await fetch(`${process.env.REACT_APP_API_URL.replace('/api', '')}/api/users/log_action/`, {
+      const response = await fetch(`${API_HOST}/api/users/log_action/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

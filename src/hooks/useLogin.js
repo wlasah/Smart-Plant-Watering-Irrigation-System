@@ -15,17 +15,18 @@ export function useLogin(onLogin) {
     try {
       console.log('[LOGIN] Starting login process...');
       const response = await authAPI.login(username, password);
+      const user = response.user || response;
 
       // Determine role based on backend is_staff flag
-      const role = response.is_staff ? 'admin' : 'user';
+      const role = user.is_staff ? 'admin' : 'user';
 
       // Store token and user info
       localStorage.setItem('auth_token', response.token);
       localStorage.setItem('currentUser', JSON.stringify({ 
-        username: response.username || username,
-        email: response.email,
-        id: response.id,
-        is_staff: response.is_staff,
+        username: user.username || username,
+        email: user.email,
+        id: user.id,
+        is_staff: user.is_staff,
         role
       }));
       localStorage.setItem('isLoggedIn', 'true');

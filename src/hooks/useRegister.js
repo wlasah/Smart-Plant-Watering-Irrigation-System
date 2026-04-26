@@ -27,8 +27,8 @@ export function useRegister(onRegister, navigate) {
     setLoading(true);
 
     try {
-      console.log('[REGISTER] Starting registration...');
-      const response = await authAPI.register(username, email, password);
+      console.log('[REGISTER] Starting admin registration...');
+      const response = await authAPI.registerAdmin(username, email, password);
       
       // Extract user data from nested response
       const userData = response.user || response;
