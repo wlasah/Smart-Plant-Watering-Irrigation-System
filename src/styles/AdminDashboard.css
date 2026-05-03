@@ -1,23 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
 @import './SidebarLayout.css';
 
-/* Variables inherited from SidebarLayout.css */
-
 .admin-dashboard {
-  /* margin-left set by SidebarLayout.css via .admin-page-wrapper > .admin-dashboard */
   font-family: 'DM Sans', sans-serif;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* Header */
 .admin-header {
-  margin-bottom: 20px;
-  padding-bottom: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .admin-header .header-content h1 {
-  margin: 0 0 3px;
-  font-size: 18px;
+  margin: 0 0 2px;
+  font-size: 16px;
   font-weight: 700;
   color: #0f172a;
   letter-spacing: -0.3px;
@@ -25,7 +28,7 @@
 
 .admin-header .header-content p {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   color: #64748b;
 }
 
@@ -33,36 +36,154 @@
 .admin-section {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  margin-bottom: 14px;
-  padding: 18px 20px;
-  animation: fadeUp 0.22s ease-out both;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  animation: fadeUp 0.2s ease-out both;
+}
+
+/* Main 2-column layout: left = overview + user table, right = alerts */
+.dashboard-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 10px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left column stacks overview + user table */
+.dashboard-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Right column: alerts stay sticky */
+.alerts-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: sticky;
+  top: 14px;
+}
+
+.alerts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1000px) {
+  .alerts-grid { grid-template-columns: 1fr; }
 }
 
 .admin-section:nth-child(1) { animation-delay: 0.03s; }
 .admin-section:nth-child(2) { animation-delay: 0.06s; }
 .admin-section:nth-child(3) { animation-delay: 0.09s; }
 .admin-section:nth-child(4) { animation-delay: 0.12s; }
-.admin-section:nth-child(5) { animation-delay: 0.15s; }
-.admin-section:nth-child(6) { animation-delay: 0.18s; }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .loading-message {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 40px;
+  border-radius: 8px;
+  padding: 32px;
   text-align: center;
   color: #64748b;
   font-size: 13px;
   font-family: 'DM Sans', sans-serif;
 }
 
+/* ── Override CriticalPlantsAlert & PlantHealthAlerts internal styles ── */
+/* Make the big status cards (Critical/Warning/Healthy) compact rows instead of tall tiles */
+.alert-section [class*="alert-stats"],
+.alert-section [class*="plant-stats"],
+.alert-section [class*="stats-grid"] {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+.alert-section [class*="stat-card"],
+.alert-section [class*="alert-card"],
+.alert-section [class*="status-card"] {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 8px 12px !important;
+  min-height: unset !important;
+  gap: 8px !important;
+}
+
+/* Shrink the giant emoji/icon in alert cards */
+.alert-section [class*="stat-card"] [class*="icon"],
+.alert-section [class*="status-card"] [class*="icon"],
+.alert-section [class*="alert-card"] svg,
+.alert-section [class*="alert-card"] span:first-child {
+  font-size: 18px !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+}
+
+/* Shrink the big numbers */
+.alert-section [class*="stat-value"],
+.alert-section [class*="count"],
+.alert-section h2[class*="number"],
+.alert-section p[class*="value"] {
+  font-size: 20px !important;
+  line-height: 1.1 !important;
+}
+
+/* Compact title text */
+.alert-section h2,
+.alert-section h3 {
+  font-size: 12px !important;
+  margin: 0 0 6px !important;
+}
+
+.alert-section p {
+  font-size: 11px !important;
+  margin: 0 !important;
+}
+
+/* Specifically target the Critical/Warning/Healthy grid that renders as 3 big tiles */
+.alert-section .critical-plants-grid,
+.alert-section .plants-status-grid,
+.alert-section .health-status-grid,
+.alert-section .alert-count-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 6px !important;
+}
+
+.alert-section .critical-plants-grid > *,
+.alert-section .plants-status-grid > *,
+.alert-section .health-status-grid > *,
+.alert-section .alert-count-grid > * {
+  padding: 8px !important;
+  min-height: unset !important;
+}
+
+/* Kill oversized icons inside those tiles */
+.alerts-column .admin-section [style*="font-size: 2"],
+.alerts-column .admin-section [style*="font-size:2"] {
+  font-size: 1.2rem !important;
+}
+
 @media (max-width: 768px) {
-  .admin-section { padding: 14px 16px; margin-bottom: 10px; }
-  .admin-header { margin-bottom: 16px; }
+  .admin-section { padding: 10px 12px; margin-bottom: 8px; }
+  .admin-header { margin-bottom: 12px; }
 }

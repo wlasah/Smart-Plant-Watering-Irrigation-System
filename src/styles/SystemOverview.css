@@ -1,221 +1,126 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
-/* ── Outer wrapper ─────────────────────────────────────────── */
-.system-overview {
+.admin-system-overview {
   font-family: 'DM Sans', sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
   background: none;
 }
 
-/* ── Header ────────────────────────────────────────────────── */
+/* Header */
 .overview-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
+  gap: 2px;
 }
 .overview-header h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: #0f172a;
 }
 .overview-header p {
   margin: 0;
   color: #64748b;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
 }
 
-/* ── Main body: cards layout ───────────────────────────────── */
+/* Body layout - stack metrics + distributions vertically inside the card */
 .overview-body {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto;
-  gap: 20px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
-  min-height: 0;
 }
 
 .metrics-panel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 0;
+  gap: 10px;
 }
 
-.distributions-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  width: 100%;
-  min-width: 0;
-  justify-content: space-between;
-}
-
-.system-health-distribution,
-.user-distribution {
-  width: 100%;
-  min-width: 0;
-}
-
-@media (max-width: 1100px) {
-  .system-overview {
-    padding: 0 8px 12px;
-  }
-
-  .overview-body {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .distributions-wrapper {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .overview-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .overview-card {
-    min-height: 110px;
-    padding: 14px 16px;
-  }
-}
-
-@media (max-width: 700px) {
-  .system-overview {
-    padding: 0 6px 10px;
-  }
-
-  .overview-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .overview-card {
-    min-height: 100px;
-    padding: 12px 14px;
-  }
-
-  .card-content h3 {
-    font-size: 9px;
-  }
-
-  .card-value {
-    font-size: 18px;
-  }
-
-  .card-label,
-  .card-content p,
-  .card-content span {
-    font-size: 11px;
-  }
-
-  .distributions-wrapper {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .system-health-distribution,
-  .user-distribution {
-    padding: 13px 14px;
-  }
-}
-
-
-
-/* ── Stats grid ─────────────────────────────────────────────── */
+/* Stats grid - 2 columns x 3 rows so cards aren't squished */
 .overview-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
   width: 100%;
 }
 
-@media (max-width: 1100px) {
+@media (min-width: 1400px) {
   .overview-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .overview-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
   }
 }
 
 .overview-card {
   background: #ffffff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 18px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   position: relative;
   overflow: hidden;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  min-height: 90px;
+  transition: all 0.18s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .overview-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 3px;
+  height: 2px;
   background: linear-gradient(90deg, #6366f1, #3b82f6);
 }
 
 .overview-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   border-color: #cbd5e1;
 }
 
 .card-icon {
-  font-size: 22px;
+  font-size: 18px;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  background: #f8fafc;
+  border-radius: 7px;
 }
 
 .card-content {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 0;
   min-width: 0;
   flex: 1;
 }
 
 .card-content h3 {
   margin: 0;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  line-height: 1.3;
+  line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -223,39 +128,37 @@
 
 .card-value {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   color: #0f172a;
 }
 
 .card-label {
-  font-size: 10px;
+  font-size: 9px;
   color: #b0bec5;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.2;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .card-label-vertical {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  font-size: 10px;
+  gap: 0;
+  font-size: 9px;
   color: #b0bec5;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .card-label-vertical span {
-  font-size: 10px;
+  font-size: 9px;
   color: #b0bec5;
   font-weight: 500;
 }
 
-/* Per-card accent colours */
+/* Accent colors */
 .overview-card.total-users::before     { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
 .overview-card.total-users .card-value { color: #6366f1; }
 .overview-card.total-plants::before    { background: linear-gradient(90deg, #10b981, #059669); }
@@ -269,51 +172,41 @@
 .overview-card.activity-count::before  { background: linear-gradient(90deg, #8b5cf6, #6366f1); }
 .overview-card.activity-count .card-value { color: #8b5cf6; }
 
-/* ── Distributions panel (below the grid) ───────────────────── */
+/* Distributions panel - side by side below the grid */
 .distributions-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   width: 100%;
-  justify-content: space-between;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 600px) {
   .distributions-wrapper {
-    flex-direction: row;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 700px) {
-  .distributions-wrapper {
-    flex-direction: column;
-    gap: 12px;
+    grid-template-columns: 1fr;
   }
 }
 
 .system-health-distribution,
 .user-distribution {
   background: #ffffff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 16px 18px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: all 0.18s ease;
   flex: 1;
 }
 
 .system-health-distribution:hover,
 .user-distribution:hover {
-  box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
   border-color: #cbd5e1;
-  transform: translateY(-2px);
 }
 
 .system-health-distribution h3,
 .user-distribution h3 {
-  margin: 0 0 12px;
-  font-size: 13px;
+  margin: 0 0 8px;
+  font-size: 11px;
   font-weight: 700;
   color: #0f172a;
 }
@@ -321,18 +214,12 @@
 .distribution-chart {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.distribution-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .distribution-bar {
   display: flex;
-  height: 8px;
+  height: 6px;
   border-radius: 999px;
   overflow: hidden;
   background: #f1f5f9;
@@ -351,22 +238,22 @@
 .distribution-legend {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 12px;
+  gap: 4px;
+  font-size: 10px;
 }
 
 .distribution-legend span {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
   color: #475569;
   font-weight: 500;
 }
 
 .legend-box {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
   display: inline-block;
   flex-shrink: 0;
 }
@@ -375,79 +262,3 @@
 .legend-box.user            { background: #67e8f9; }
 .legend-box.healthy         { background: #10b981; }
 .legend-box.needs-attention { background: #f59e0b; }
-
-/* --- Professional layout and responsive improvements --- */
-.system-overview {
-  max-width: 1200px;
-  margin: 0 auto;
-  background: none;
-}
-
-.overview-body {
-  flex-wrap: nowrap;
-  align-items: flex-start;
-}
-
-.overview-grid {
-  min-width: 540px;
-  flex: 2;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 18px;
-}
-
-.overview-card {
-  min-width: 160px;
-  min-height: 90px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  border-radius: 14px;
-  padding: 18px 20px;
-}
-
-.distributions-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 18px;
-  flex: 1;
-  min-width: 0;
-  width: auto;
-  flex-shrink: 1;
-  flex-basis: 320px;
-  max-width: 100%;
-}
-
-@media (max-width: 1100px) {
-  .system-overview {
-    max-width: 98vw;
-  }
-  .overview-body {
-    flex-direction: column;
-    gap: 32px;
-  }
-  .overview-grid {
-    min-width: 0;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 16px;
-  }
-  .distributions-wrapper {
-    width: 100%;
-    max-width: 100%;
-    gap: 16px;
-    flex-direction: row;
-  }
-}
-
-@media (max-width: 700px) {
-  .overview-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
-    gap: 12px;
-  }
-  .distributions-wrapper {
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
-    gap: 12px;
-  }
-}

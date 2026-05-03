@@ -1,12 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
-/* =====================
-   CSS VARIABLES
-   All layout uses these so toggling sidebar just changes one value
-   ===================== */
 :root {
-  --sidebar-w: 220px;
-  --sidebar-collapsed-w: 56px;
+  --sidebar-w: 200px;
+  --sidebar-collapsed-w: 50px;
   --sidebar-bg: #0f1117;
   --accent: #6366f1;
   --text-primary: #f1f5f9;
@@ -14,12 +10,10 @@
   --border-dark: rgba(255,255,255,0.07);
   --hover-bg: rgba(255,255,255,0.05);
   --active-bg: rgba(99,102,241,0.15);
-  --tr: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --tr: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* =====================
-   SIDEBAR
-   ===================== */
+/* SIDEBAR */
 .admin-sidebar {
   position: fixed;
   left: 0;
@@ -46,24 +40,24 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 10px;
+  padding: 8px;
   border-bottom: 1px solid var(--border-dark);
-  min-height: 48px;
+  min-height: 42px;
   flex-shrink: 0;
 }
 
 .sidebar-toggle {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   background: var(--hover-bg);
   border: 1px solid var(--border-dark);
   color: var(--text-muted);
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   transition: all 0.15s;
   flex-shrink: 0;
@@ -81,8 +75,8 @@
 .admin-profile {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px;
+  gap: 8px;
+  padding: 10px;
   border-bottom: 1px solid var(--border-dark);
   flex-shrink: 0;
   overflow: hidden;
@@ -90,18 +84,18 @@
 
 .admin-sidebar.collapsed .admin-profile {
   justify-content: center;
-  padding: 12px 0;
+  padding: 10px 0;
 }
 
 .profile-avatar {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background: var(--accent);
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: white;
   flex-shrink: 0;
@@ -111,12 +105,7 @@
   overflow: hidden;
   white-space: nowrap;
   transition: opacity var(--tr), max-width var(--tr);
-  max-width: 160px;
-  color: #ffffff !important;
-}
-
-.profile-info * {
-  color: #ffffff !important;
+  max-width: 140px;
 }
 
 .admin-sidebar.collapsed .profile-info {
@@ -127,19 +116,17 @@
 
 .profile-info h3 {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #ffffff !important;
-  opacity: 1 !important;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
 
 .profile-role {
   margin: 1px 0 0;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: var(--accent);
   text-transform: uppercase;
@@ -150,17 +137,17 @@
 .sidebar-divider {
   height: 1px;
   background: var(--border-dark);
-  margin: 4px 0;
+  margin: 3px 0;
   flex-shrink: 0;
 }
 
 /* Nav */
 .sidebar-nav {
   flex: 1;
-  padding: 8px;
+  padding: 6px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -168,22 +155,22 @@
 .nav-menu-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
+  gap: 8px;
+  padding: 7px 8px;
   color: var(--text-muted);
   text-decoration: none;
-  border-radius: 7px;
-  font-size: 13px;
+  border-radius: 6px;
+  font-size: 12px;
   font-weight: 500;
   transition: all 0.15s;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 36px;
+  min-height: 32px;
 }
 
 .admin-sidebar.collapsed .nav-menu-item {
   justify-content: center;
-  padding: 8px;
+  padding: 7px;
 }
 
 .nav-menu-item:hover {
@@ -198,9 +185,9 @@
 }
 
 .menu-icon {
-  font-size: 15px;
+  font-size: 14px;
   flex-shrink: 0;
-  width: 18px;
+  width: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -210,7 +197,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   transition: opacity var(--tr), max-width var(--tr);
-  max-width: 160px;
+  max-width: 140px;
 }
 
 .admin-sidebar.collapsed .menu-label {
@@ -221,7 +208,7 @@
 
 /* Footer */
 .sidebar-footer {
-  padding: 8px;
+  padding: 6px;
   border-top: 1px solid var(--border-dark);
   flex-shrink: 0;
 }
@@ -230,25 +217,25 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
-  padding: 8px 10px;
+  padding: 7px 8px;
   background: transparent;
   border: 1px solid rgba(239,68,68,0.2);
   color: #94a3b8;
-  border-radius: 7px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 12px;
   transition: all 0.15s;
   font-family: 'DM Sans', sans-serif;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 36px;
+  min-height: 32px;
 }
 
 .admin-sidebar.collapsed .logout-btn {
-  padding: 8px;
+  padding: 7px;
 }
 
 .logout-btn:hover {
@@ -257,10 +244,7 @@
   color: #ef4444;
 }
 
-.logout-icon {
-  font-size: 14px;
-  flex-shrink: 0;
-}
+.logout-icon { font-size: 13px; flex-shrink: 0; }
 
 .logout-text {
   white-space: nowrap;
@@ -268,82 +252,63 @@
   max-width: 120px;
 }
 
-/* --- Mobile sidebar support --- */
+/* Mobile */
 .mobile-menu-trigger {
   display: none;
   position: fixed;
   top: 10px;
   left: 10px;
   z-index: 300;
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border: none;
-  border-radius: 8px;
+  border-radius: 7px;
   background: rgba(15, 23, 42, 0.85);
   color: #fff;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
   cursor: pointer;
 }
 
-.mobile-sidebar-backdrop {
-  display: none;
-}
+.mobile-sidebar-backdrop { display: none; }
 
 .mobile-close-btn {
   display: none;
   margin-left: auto;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border: none;
   background: transparent;
   color: var(--text-muted);
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
 }
 
 @media (max-width: 900px) {
   .admin-sidebar {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     height: 100vh;
     width: var(--sidebar-w);
     transform: translateX(-110%);
     transition: transform var(--tr), width var(--tr);
     z-index: 250;
   }
-
-  .admin-sidebar.open {
-    transform: translateX(0);
-  }
-
-  .admin-sidebar.collapsed {
-    width: var(--sidebar-w);
-  }
-
-  .admin-sidebar .sidebar-header .mobile-close-btn {
-    display: inline-flex;
-  }
-
-  .mobile-menu-trigger {
-    display: inline-flex;
-  }
+  .admin-sidebar.open { transform: translateX(0); }
+  .admin-sidebar.collapsed { width: var(--sidebar-w); }
+  .admin-sidebar .sidebar-header .mobile-close-btn { display: inline-flex; }
+  .mobile-menu-trigger { display: inline-flex; }
 
   .mobile-sidebar-backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.4);
     z-index: 240;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease;
   }
-
   .mobile-sidebar-backdrop.show {
     display: block;
     opacity: 1;
@@ -356,18 +321,10 @@
   .admin-page-wrapper > .enhanced-settings,
   .admin-page-wrapper > .settings-page-inner {
     margin-left: 0 !important;
-    padding: 14px 12px;
+    padding: 12px 10px;
   }
 }
 
 .admin-sidebar::-webkit-scrollbar { width: 3px; }
 .admin-sidebar::-webkit-scrollbar-track { background: transparent; }
 .admin-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-
-@media (max-width: 768px) {
-  .admin-sidebar { width: var(--sidebar-collapsed-w) !important; }
-  .profile-info, .menu-label, .logout-text { display: none !important; }
-  .admin-profile { justify-content: center !important; }
-  .nav-menu-item { justify-content: center !important; padding: 8px !important; }
-  .logout-btn { justify-content: center; padding: 8px; }
-}

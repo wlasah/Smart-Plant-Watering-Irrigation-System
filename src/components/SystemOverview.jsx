@@ -12,7 +12,7 @@ const SystemOverview = ({ users = [], activityLog = [] }) => {
 
   if (loading) {
     return (
-      <div className="system-overview">
+      <div className="admin-system-overview">
         <div className="overview-header">
           <h2>System Overview</h2>
           <p>Loading system statistics...</p>
@@ -22,7 +22,7 @@ const SystemOverview = ({ users = [], activityLog = [] }) => {
   }
 
   return (
-    <div className="system-overview">
+    <div className="admin-system-overview">
 
       {/* Header */}
       <div className="overview-header">

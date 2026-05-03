@@ -1,16 +1,13 @@
 /* =====================================================================
    SIDEBAR LAYOUT SYSTEM
-   Import this file in any page that sits alongside the admin sidebar.
-   The sidebar adds/removes the .collapsed class on .admin-sidebar,
-   and the main content reads the same CSS variables to shift itself.
    ===================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --sidebar-w: 220px;
-  --sidebar-collapsed-w: 56px;
-  --page-bg: #f8fafc;
+  --sidebar-w: 200px;
+  --sidebar-collapsed-w: 50px;
+  --page-bg: #f1f5f9;
   --card-bg: #ffffff;
   --border: #e2e8f0;
   --accent: #6366f1;
@@ -18,15 +15,11 @@
   --text-primary: #0f172a;
   --text-muted: #64748b;
   --text-faint: #94a3b8;
-  --radius: 10px;
+  --radius: 8px;
   --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
 }
 
-/* =====================
-   PAGE WRAPPER
-   Wraps sidebar + content side-by-side.
-   ===================== */
 .admin-page-wrapper {
   display: flex;
   min-height: 100vh;
@@ -34,11 +27,7 @@
   font-family: 'DM Sans', sans-serif;
 }
 
-/* =====================
-   MAIN CONTENT AREA
-   Shifts right to match sidebar width.
-   When sidebar collapses, all pages shift left.
-   ===================== */
+/* Main content area - tighter padding */
 .admin-page-wrapper > .admin-dashboard,
 .admin-page-wrapper > .analytics-page,
 .admin-page-wrapper > .all-users-plants-page,
@@ -48,12 +37,12 @@
   min-width: 0;
   margin-left: var(--sidebar-w);
   transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 20px 24px;
+  padding: 14px 16px;
   background: var(--page-bg);
   min-height: 100vh;
 }
 
-/* When sidebar is collapsed, all child pages shift left */
+/* Collapsed sidebar */
 .admin-page-wrapper:has(.admin-sidebar.collapsed) > .admin-dashboard,
 .admin-page-wrapper:has(.admin-sidebar.collapsed) > .analytics-page,
 .admin-page-wrapper:has(.admin-sidebar.collapsed) > .all-users-plants-page,
@@ -62,23 +51,21 @@
   margin-left: var(--sidebar-collapsed-w);
 }
 
-/* =====================
-   SHARED PAGE HEADER
-   ===================== */
+/* Shared page header */
 .page-header-bar {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 16px;
+  gap: 12px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   flex-wrap: wrap;
 }
 
 .page-header-bar h1 {
-  margin: 0 0 3px;
-  font-size: 18px;
+  margin: 0 0 2px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.3px;
@@ -86,23 +73,19 @@
 
 .page-header-bar p {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
-/* =====================
-   SHARED CARD
-   ===================== */
+/* Shared card */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px 20px;
+  padding: 14px 16px;
 }
 
-/* =====================
-   RESPONSIVE
-   ===================== */
+/* Responsive */
 @media (max-width: 1024px) {
   .admin-page-wrapper > .admin-dashboard,
   .admin-page-wrapper > .analytics-page,
@@ -110,12 +93,7 @@
   .admin-page-wrapper > .enhanced-settings,
   .admin-page-wrapper > .settings-page-inner {
     margin-left: var(--sidebar-collapsed-w);
-    padding: 16px 18px;
-  }
-
-  /* Collapsed state at tablet still collapses further - sidebar handles this */
-  .admin-page-wrapper:has(.admin-sidebar.collapsed) > * {
-    margin-left: var(--sidebar-collapsed-w);
+    padding: 12px 14px;
   }
 }
 
@@ -126,6 +104,6 @@
   .admin-page-wrapper > .enhanced-settings,
   .admin-page-wrapper > .settings-page-inner {
     margin-left: var(--sidebar-collapsed-w);
-    padding: 14px 16px;
+    padding: 10px 12px;
   }
 }
