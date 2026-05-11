@@ -61,7 +61,7 @@ const authAPI = {
   registerAdmin: async (username, email, password, token = null) => {
     const headers = { 'Content-Type': 'application/json' };
     if (token) headers.Authorization = 'Token ' + token;
-    const response = await fetch(API_BASE_URL + '/users/register_admin/', {
+    const response = await fetch(API_BASE_URL + '/setup/register-admin/', {
       method: 'POST',
       headers,
       body: JSON.stringify({ username, email, password, password_confirm: password }),
