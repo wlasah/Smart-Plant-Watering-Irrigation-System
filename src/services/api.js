@@ -139,7 +139,20 @@ const adminAPI = {
   getAdminStats: () => fetchWithToken('/plants/admin_stats/'),
 };
 
-const apiService = { authAPI, plantsAPI, historyAPI, adminAPI };
+const iotAPI = {
+  getTelemetry: (device_id = '', limit = 20) => {
+    const params = new URLSearchParams({ limit: limit.toString() });
+    if (device_id) params.set('device_id', device_id);
+    return fetchWithToken('/iot/telemetry/?' + params.toString());
+  },
+  getLatestTelemetry: (device_id) => {
+    const params = new URLSearchParams({ limit: '1' });
+    if (device_id) params.set('device_id', device_id);
+    return fetchWithToken('/iot/telemetry/?' + params.toString());
+  },
+};
 
-export { authAPI, plantsAPI, historyAPI, adminAPI };
+const apiService = { authAPI, plantsAPI, historyAPI, adminAPI, iotAPI };
+
+export { authAPI, plantsAPI, historyAPI, adminAPI, iotAPI };
 export default apiService;
