@@ -1,272 +1,155 @@
-# Smart Plant Watering Irrigation System - Frontend
+﻿# 🌱 Smart Plant Watering System - Web App
 
-A React-based frontend for the Smart Plant Watering Irrigation System that helps users monitor and control their plants' watering needs.
+A React web frontend for the Smart Plant Watering System. This application provides a dashboard to monitor plant moisture, view plant details, and connect to backend APIs for live data.
 
-## Project Overview
+## Overview
 
-This application provides a user-friendly dashboard interface for the Smart Plant Watering Irrigation System, allowing users to:
-- Monitor soil moisture levels for multiple plants
-- Track watering schedules and history
-- View plant health status
-- Water plants manually through the interface
-- Track plant location and current conditions
+This web app is designed for desktop and tablet use. It includes:
+- Plant moisture dashboards
+- Status cards for plant health
+- Search and filter plant views
+- Responsive layout for multiple screen sizes
+- Backend API support via environment variables
 
 ## Features
 
-### Dashboard Screen
-- **System Overview**: Quick statistics including total plants, healthy plants, plants needing attention, and average moisture level
-- **Plant Status Cards**: Individual cards for each plant showing:
-  - Plant name and location
-  - Current soil moisture level (with color-coded indicators)
-  - Health status (Healthy or Needs Attention)
-  - Last watering time
-  - Watering schedule
-  - Water Now button for manual watering
+- Dashboard summary with total plants, healthy plants, and moisture statistics
+- Plant list with clear status indicators
+- Visual moisture presentation and health labels
+- Manual water controls (via backend commands)
+- Support for backend configuration with `REACT_APP_API_URL`
 
-### Dynamic Data Display
-- Uses React state and mock data to simulate real system data
-- Responsive grid layout that adapts to different screen sizes
-- Real-time status updates and calculations
+## Requirements
 
-### Semantic HTML
-- Proper use of `<header>`, `<main>`, `<section>`, `<article>`, and `<footer>` tags
-- Semantic elements for better accessibility and SEO
-
-### CSS Styling
-- Modern, responsive design with:
-  - Gradient backgrounds
-  - Smooth transitions and hover effects
-  - Mobile-responsive grid layouts
-  - Color-coded status indicators
-  - Accessibility-focused design
-
-## Getting Started
-
-### Prerequisites
-- Node.js (v14 or higher)
+- Node.js 14 or higher
 - npm or yarn
 
-### Installation
+## Installation
 
-1. Clone the repository:
-```bash
-git clone <your-repository-url>
-cd smart-plant-watering
-```
+1. Open a terminal in the web app folder:
+   ```bash
+   cd e:\Download\appdev\Smart-Plant-Watering-System
+   ```
 
 2. Install dependencies:
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-### Running the Application
+## Running Locally
 
 Start the development server:
 ```bash
 npm start
 ```
 
-The application will open in your browser at `http://localhost:3000`
+Open the app in your browser at:
+```
+http://localhost:3000
+```
 
-### Building for Production
+## Build for Production
 
+Create an optimized build:
 ```bash
 npm run build
 ```
 
-This creates an optimized production build in the `build` folder.
+The production files will be generated in the `build` folder.
 
-## Deployment to Vercel
+## Backend Configuration
 
-This application is deployed and hosted on [Vercel](https://vercel.com). Follow these steps to deploy your own instance:
+To connect the web app with a backend API, configure the base URL in a `.env.development` file:
 
-### Option 1: Deploy via Vercel CLI (Recommended)
-
-1. **Install Vercel CLI** (if not already installed):
-```bash
-npm install -g vercel
+```env
+REACT_APP_API_URL=http://192.168.1.10:8001
 ```
 
-2. **Login to Vercel**:
-```bash
-vercel login
-```
-Follow the prompts to authenticate with your Vercel account.
+If the backend is running on another device, update the IP address accordingly.
 
-3. **Deploy the project**:
-```bash
-vercel
-```
-Or for production deployment:
-```bash
-vercel --prod
+### Optional Backend URL Auto-Detect
+
+When others clone the repo, they should create their own `.env.development` or `.env.local` file and set the backend URL for their device. For example:
+
+```env
+REACT_APP_API_URL=http://<YOUR_LOCAL_IP>:8001
 ```
 
-4. **Follow the prompts** to configure your project settings:
-   - Project name (default: smart-plant-watering-system)
-   - Framework: Select "Next.js" or "Other" → "Create React App" 
-   - Root directory: `./` (or `./Smart-Plant-Watering-System` if deploying from parent directory)
-
-5. **Your app will be deployed** and you'll receive a live URL.
-
-### Option 2: Deploy via GitHub Integration
-
-1. **Push your code to GitHub**:
-```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
-
-2. **Connect to Vercel**:
-   - Visit [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Select "Import Git Repository"
-   - Choose your GitHub repository
-   - Click "Import"
-
-3. **Configure Project Settings**:
-   - **Framework Preset**: Next.js / Create React App
-   - **Build Command**: `npm run build` (default)
-   - **Output Directory**: `build` (default)
-   - **Install Command**: `npm install` (default)
-
-4. **Deploy**:
-   - Click "Deploy"
-   - Vercel will automatically build and deploy your app
-   - You'll receive a production URL
-
-### Option 3: Manual Deployment via Git
-
-1. **Install Vercel**:
-```bash
-npm install -g vercel
-```
-
-2. **Link your project**:
-```bash
-vercel link
-```
-
-3. **Deploy**:
-```bash
-vercel --prod
-```
-
-### Environment Variables (if needed)
-
-If your app requires environment variables:
-
-1. Create a `.env.local` file in the root directory:
-```
-REACT_APP_API_URL=https://your-api-url.com
-REACT_APP_VERCEL_ENV=production
-```
-
-2. In Vercel Dashboard:
-   - Go to **Settings** → **Environment Variables**
-   - Add your environment variables
-   - Redeploy
-
-### Post-Deployment
-
-- **View Analytics**: 
-  - Go to your Vercel Dashboard
-  - Select your project
-  - Click **Analytics** tab to view traffic and performance metrics
-
-- **Custom Domain** (Optional):
-  - In Vercel Dashboard → **Settings** → **Domains**
-  - Add your custom domain
-  - Update DNS records as instructed
-
-- **Automatic Deployments**:
-  - Vercel automatically redeploys when you push to your main branch
-  - Preview deployments are created for pull requests
-
-### Troubleshooting Deployment
-
-**Build fails with "npm not found"**:
-- Ensure `package.json` is in the root directory
-- Check that Node.js version is 14.0 or higher
-
-**App shows blank page**:
-- Check browser console for errors (F12)
-- Verify all imports and paths are correct
-- Clear Vercel cache: In Dashboard → **Settings** → **Advanced** → **Clear Build Cache**
-
-**Performance issues**:
-- Monitor **Analytics tab** in Vercel Dashboard
-- Check **Core Web Vitals** for optimization tips
-- Reduce bundle size by reviewing dependencies
-
-### Vercel URL Format
-
-Your deployed app will be accessible at:
-```
-https://<project-name>.vercel.app
-```
-
-You can also set up a custom domain to replace this URL.
+- Use the backend host machine's LAN IP for phones or other devices on the same network.
+- If the frontend and backend run on the same machine, `http://localhost:8001` can work in the browser.
+- Restart the React server after changing `.env` files.
 
 ## Project Structure
 
 ```
-smart-plant-watering/
+Smart-Plant-Watering-System/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
 ├── src/
 │   ├── components/
-│   │   └── Dashboard.jsx          # Main dashboard component
+│   ├── hooks/
+│   ├── pages/
+│   ├── services/
 │   ├── styles/
-│   │   └── Dashboard.css          # Dashboard styling
-│   ├── App.js                     # Main App component
-│   ├── App.css                    # App styling
-│   ├── index.js                   # React entry point
-│   └── index.css                  # Global styles
-├── public/
-│   └── index.html                 # HTML template
-├── package.json                   # Project dependencies
-└── README.md                      # This file
+│   ├── App.js
+│   └── index.js
+├── package.json
+└── README.md
 ```
 
-## Data Structure
+## Useful Commands
 
-The dashboard uses the following plant data structure:
-
-```javascript
-{
-  id: number,
-  name: string,
-  moistureLevel: number (0-100),
-  status: "Healthy" | "Needs Attention",
-  lastWatered: string,
-  location: string,
-  wateringSchedule: string
-}
+```bash
+npm install
+npm start
+npm run build
+npm test
+npm run eject
 ```
 
-## Future Enhancements
+## Deployment
 
-- Connect to backend API for real plant data
-- Implement user authentication
-- Add plant watering history graphs
-- Create settings/configuration screen
-- Add notifications for watering reminders
-- Implement plant-specific care guides
+### Deploy to Vercel
 
-## Technologies Used
+1. Push the project to GitHub.
+2. Create a new Vercel project and connect your repository.
+3. Use these settings:
+   - Build Command: `npm run build`
+   - Output Directory: `build`
+4. Add environment variables in Vercel if needed.
 
-- React 18.x
-- CSS3 with Flexbox and Grid
-- Node.js/npm
+### Other Hosting Options
 
-## License
+- Use the `build` directory as static assets
+- Host using any static file server such as Netlify, GitHub Pages, or Nginx
 
-This project is part of the Smart Plant Watering Irrigation System initiative.
+## Troubleshooting
 
-## Created
+### App does not start
+- Run `npm install`
+- Check for errors in the terminal
+- Clear caches by deleting `node_modules` and reinstalling
 
-February 2026
+### Backend connection fails
+- Confirm `REACT_APP_API_URL` is correct
+- Use the backend machine’s LAN IP when accessing from another device
+- Restart the app after changing `.env`
+
+### Build issues
+- Delete `node_modules` and `package-lock.json`
+- Run `npm install` again
+
+## Notes
+
+- This frontend is prepared for backend API integration.
+- If you need live plant data, connect it to the FastAPI or Django backend.
+
+## Support
+
+For troubleshooting, refer to the backend README and the main repository documentation.
 
 ---
 
-**Note**: This is the frontend React application. Make sure to have the backend API server running for full system functionality.
+Built with React and designed for clean plant monitoring.

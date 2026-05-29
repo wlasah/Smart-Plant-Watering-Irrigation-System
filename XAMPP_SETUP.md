@@ -59,6 +59,18 @@ INSERT INTO plants (name, location, moisture_level, status, last_watered) VALUES
 
 ---
 
+## Access from Other Devices
+
+If the React frontend or another client runs on a different computer or mobile device, use the backend machine's local network IP instead of `localhost`. For example:
+
+```bash
+http://192.168.1.10:5000/api/plants
+```
+
+Also ensure the frontend origin is permitted by your CORS settings and that all devices are on the same LAN.
+
+---
+
 ## Step 3: Create Node.js Backend API
 
 Create a `backend` folder in your project root:
